@@ -12,6 +12,7 @@ import { processGiftRedemption } from "../services/giftRedemptionService";
 import { Customer, locationOptions } from "../types";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
+import { appConfig } from "../config/config";
 
 const GiftRedemptionPage: React.FC = () => {
   const [scanValue, setScanValue] = useState<string>("");
@@ -29,6 +30,7 @@ const GiftRedemptionPage: React.FC = () => {
   );
   const [registrations, setRegistrations] = useState<Customer[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const qrPrefix = appConfig.qrPrefix;
 
   // Add new function to calculate statistics
   const updateStatistics = (data: Customer[]) => {
@@ -75,8 +77,8 @@ const GiftRedemptionPage: React.FC = () => {
     let value = e.target.value.trim();
 
     // Remove the prefix if it exists (to avoid double prefixes)
-    if (value.startsWith("aux-training-")) {
-      value = value.replace(/^aux-training-/, "");
+    if (value.startsWith(`${qrPrefix}-`)) {
+      value = value.replace(new RegExp(`^${qrPrefix}-`), "");
     }
 
     // Remove all non-digit characters
@@ -95,7 +97,7 @@ const GiftRedemptionPage: React.FC = () => {
     }
 
     // Prepend the prefix
-    const finalValue = `aux-training-${formattedIC}`;
+    const finalValue = `${qrPrefix}-${formattedIC}`;
     setScanValue(finalValue);
   };
 

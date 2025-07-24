@@ -10,23 +10,29 @@ import {
   deleteField,
 } from "firebase/firestore";
 import { Customer } from "../types";
+import { appConfig } from "../config/config";
 
 // Parse the QR code to extract the ID number
 export const parseQRCode = (qrCode: string): string | null => {
-  // Format: "aux-training-950920-08-6687" or "950920-08-6687"
-  const parts = qrCode.split("-");
-
+  const qrPrefix = appConfig.qrPrefix;
   // Check if the QR code has the expected format with prefix
-  if (parts.length >= 3 && parts[0] === "aux" && parts[1] === "training") {
-    // Extract the ID number (last parts of the QR code)
-    return parts.slice(2).join("-");
+  if (qrCode.startsWith(`${qrPrefix}-`)) {
+    return qrCode.substring(`${qrPrefix}-`.length);
   }
 
-  // Check if the QR code is just the ID number without the prefix
-  // Format: "950920-08-6687"
-  const idNumberPattern = /^\d{6}-\d{2}-\d{4}$/;
-  if (idNumberPattern.test(qrCode)) {
+  // Check if the QR code is just the ID number with dashes (XXXXXX-XX-XXXX)
+  const idNumberWithDashesPattern = /^\d{6}-\d{2}-\d{4}$/;
+  if (idNumberWithDashesPattern.test(qrCode)) {
     return qrCode;
+  }
+
+  // Check if the QR code is the ID number without dashes (XXXXXXXXXXXX)
+  const idNumberWithoutDashesPattern = /^\d{12}$/;
+  if (idNumberWithoutDashesPattern.test(qrCode)) {
+    return `${qrCode.substring(0, 6)}-${qrCode.substring(
+      6,
+      8
+    )}-${qrCode.substring(8, 12)}`;
   }
 
   return null;

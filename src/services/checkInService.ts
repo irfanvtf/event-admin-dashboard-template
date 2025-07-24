@@ -15,17 +15,24 @@ import { appConfig } from "../config/config";
 // Parse the QR code to extract the ID number
 export const parseQRCode = (qrCode: string): string | null => {
   const qrPrefix = appConfig.qrPrefix;
-  const parts = qrCode.split("-");
-
   // Check if the QR code has the expected format with prefix
   if (qrCode.startsWith(`${qrPrefix}-`)) {
     return qrCode.substring(`${qrPrefix}-`.length);
   }
 
-  // Check if the QR code is just the ID number without the prefix
-  const idNumberPattern = /^\d{6}-\d{2}-\d{4}$/;
-  if (idNumberPattern.test(qrCode)) {
+  // Check if the QR code is just the ID number with dashes (XXXXXX-XX-XXXX)
+  const idNumberWithDashesPattern = /^\d{6}-\d{2}-\d{4}$/;
+  if (idNumberWithDashesPattern.test(qrCode)) {
     return qrCode;
+  }
+
+  // Check if the QR code is the ID number without dashes (XXXXXXXXXXXX)
+  const idNumberWithoutDashesPattern = /^\d{12}$/;
+  if (idNumberWithoutDashesPattern.test(qrCode)) {
+    return `${qrCode.substring(0, 6)}-${qrCode.substring(
+      6,
+      8
+    )}-${qrCode.substring(8, 12)}`;
   }
 
   return null;

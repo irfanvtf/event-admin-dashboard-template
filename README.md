@@ -19,7 +19,7 @@ This admin dashboard provides a user interface for managing events. It features 
 ## Project Structure
 
 ```
-event-admin-dashboard/
+event-admin-dashboard-template/
 ├── public/                 # Static assets
 ├── src/
 │   ├── components/         # Reusable UI components
@@ -49,12 +49,14 @@ event-admin-dashboard/
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/your-username/event-admin-dashboard.git
    cd event-admin-dashboard
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    # or
@@ -62,18 +64,22 @@ event-admin-dashboard/
    ```
 
 3. Set up environment variables:
+
    - Create a `.env` file in the root of the project and add the following environment variables:
-    ```
-    VITE_FIREBASE_API_KEY=your_api_key
-    VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-    VITE_FIREBASE_PROJECT_ID=your_project_id
-    VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-    VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-    VITE_FIREBASE_APP_ID=your_app_id
-    ```
+
+   ```
+   VITE_FIREBASE_API_KEY=your_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   ```
+
    - For local development, no additional configuration is needed
 
 4. Start the development server:
+
    ```bash
    npm run dev
    # or
@@ -123,4 +129,3 @@ The application can be deployed to any static hosting service that supports sing
 
 1. Build the application
 2. Deploy the contents of the `dist/` directory
-

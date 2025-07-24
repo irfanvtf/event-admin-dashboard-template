@@ -1,10 +1,10 @@
-# AUX Admin Dashboard
+# Event Admin Dashboard
 
-A modern admin dashboard application built with React, TypeScript, and Firebase, designed for the AUX training platform.
+A modern admin dashboard application built with React, TypeScript, and Firebase, designed for event management.
 
 ## Project Overview
 
-This admin dashboard provides a user interface for managing the AUX training platform. It features user authentication via Firebase, a responsive layout with collapsible sidebar, and a clean, modern UI built with Tailwind CSS.
+This admin dashboard provides a user interface for managing events. It features user authentication via Firebase, a responsive layout with collapsible sidebar, and a clean, modern UI built with Tailwind CSS.
 
 ## Technology Stack
 
@@ -19,7 +19,7 @@ This admin dashboard provides a user interface for managing the AUX training pla
 ## Project Structure
 
 ```
-aux-backend/
+event-admin-dashboard/
 ├── public/                 # Static assets
 ├── src/
 │   ├── components/         # Reusable UI components
@@ -50,8 +50,8 @@ aux-backend/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/aux-backend.git
-   cd aux-backend
+   git clone https://github.com/your-username/event-admin-dashboard.git
+   cd event-admin-dashboard
    ```
 
 2. Install dependencies:
@@ -62,7 +62,15 @@ aux-backend/
    ```
 
 3. Set up environment variables:
-   - Firebase configuration is already set up in `src/services/firebase.ts`
+   - Create a `.env` file in the root of the project and add the following environment variables:
+    ```
+    VITE_FIREBASE_API_KEY=your_api_key
+    VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+    VITE_FIREBASE_PROJECT_ID=your_project_id
+    VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+    VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+    VITE_FIREBASE_APP_ID=your_app_id
+    ```
    - For local development, no additional configuration is needed
 
 4. Start the development server:

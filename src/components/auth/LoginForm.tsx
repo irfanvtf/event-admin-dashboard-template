@@ -46,7 +46,7 @@ const LoginForm: React.FC = () => {
               <ShieldCheck className="h-10 w-10 text-primary-500" />
             </div>
           </div>
-          <h2 className="mt-6 text-2xl font-bold text-secondary-900">Admin Dashboard</h2>
+          <h2 className="mt-6 text-2xl font-bold text-secondary-900">Event Admin Dashboard</h2>
           <p className="mt-2 text-sm text-secondary-500">Sign in to your account</p>
         </div>
         

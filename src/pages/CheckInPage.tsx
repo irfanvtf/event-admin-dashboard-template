@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { processCheckIn } from "../services/checkInService";
 import { Customer, locationOptions } from "../types";
+import { appConfig } from "../config/config";
 
 const CheckInPage: React.FC = () => {
   const [scanValue, setScanValue] = useState<string>("");
@@ -20,6 +21,7 @@ const CheckInPage: React.FC = () => {
   const [lastCheckedInCustomer, setLastCheckedInCustomer] =
     useState<Customer | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const qrPrefix = appConfig.qrPrefix;
 
   // Auto-focus the input field when the component mounts
   useEffect(() => {
@@ -46,8 +48,8 @@ const CheckInPage: React.FC = () => {
     let value = e.target.value.trim();
 
     // Remove the prefix if it exists (to avoid double prefixes)
-    if (value.startsWith("aux-training-")) {
-      value = value.replace(/^aux-training-/, "");
+    if (value.startsWith(`${qrPrefix}-`)) {
+      value = value.replace(new RegExp(`^${qrPrefix}`), "");
     }
 
     // Remove all non-digit characters
@@ -66,7 +68,7 @@ const CheckInPage: React.FC = () => {
     }
 
     // Prepend the prefix
-    const finalValue = `aux-training-${formattedIC}`;
+    const finalValue = `${qrPrefix}-${formattedIC}`;
     // Set the scan value directly without formatting or limiting characters
 
     setScanValue(finalValue);
